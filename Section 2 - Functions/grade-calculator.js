@@ -1,5 +1,5 @@
-let studentGrade = function (score, maxScore){
-    let percent = score*100/maxScore;
+const studentGrade = function (score, maxScore){
+    const percent = score*100/maxScore;
     let grade;
     if(percent > 90){
         grade = 'A';
