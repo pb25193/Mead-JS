@@ -25,6 +25,14 @@ let filters = {
     searchText: ''
 };
 
+/// things to do
+/// local storage management
+/// refactoring
+/// UUID integration
+/// storage event listener 
+
+
+
 //DOM elements
 let pendingTasks = document.querySelector('#incomplete-todos');
 let completeTasks = document.querySelector('#completed-todos');
