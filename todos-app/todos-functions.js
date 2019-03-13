@@ -29,16 +29,7 @@ let retrieveTodos = function(){
     }
 };
 
-// let deleteTodos = function(todos, identifier){
-//     const index = todos.findIndex(function(element){
-//         return element.id === identifier;
-//     })
-//     if(index>-1){
-//         todos.splice(index, 1);
-//         storeTodos(todos);
-//         renderTodos(todos);
-//     }
-// }
+
 
 let defineDelete = function(button, identifier){
     button.addEventListener('click', function(){
