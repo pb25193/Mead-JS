@@ -1,5 +1,6 @@
 let renderNotes = function(notes){
-    notesDiv.innerHTML = ''
+    notesDiv.innerHTML = '';
+    notes.sort(sorters[sortBy.value]);
     notes.forEach(function(element){
         let searchAllows = element.title.includes(filters.searchText);
         if(searchAllows){
@@ -8,6 +9,15 @@ let renderNotes = function(notes){
         }
     });
 }
+
+let renderEditedTime = function(timestamp){
+    if(timestamp){
+        editedFromNow.textContent = `This list was edited ${moment(timestamp).fromNow()}`;
+    } else {
+        editedFromNow.textContent = `Please create a note!`;
+    }
+}
+
 
 let getSavedNotes = function(){
     let notesText = localStorage.getItem('notes');
@@ -18,9 +28,24 @@ let getSavedNotes = function(){
     }
 }
 
+let getEditedTime = function(){
+    let timeText = localStorage.getItem('editedTime');
+    if(timeText){
+        return JSON.parse(timeText);
+    } else {
+        return 0;
+    }
+}
+
+
 let saveNotes = function(notes){
     const notesText = JSON.stringify(notes);
     localStorage.setItem('notes', notesText);
+}
+
+let saveEditedTime = function(timestamp){
+    const timeText = JSON.stringify(timestamp);
+    localStorage.setItem('editedTime', timeText);
 }
 
 let defineDelete = function(button, identifier){

@@ -38,14 +38,35 @@ notes = getSavedNotes();
 let searchBox = document.querySelector('#search-box');
 let notesDiv = document.querySelector('#notes');
 let newNote = document.querySelector("#new-note");
+let editedFromNow = document.querySelector('#last-edited');
+let sortBy = document.querySelector('#sort-by');
 
 const filters = {
     searchText: ''
 };
 
+const sorters = {
+    byTitle: function(a, b){
+        if(a.title<b.title){
+            return -1;
+        }
+        if(a.title>b.title){
+            return 1;
+        }
+        return 0;
+    },
+    byEdited: function(a, b){
+        return b.updatedAt-a.updatedAt;
+    },
+    byCreated: function(a, b){
+        return b.createdAt-a.createdAt;
+    }
+};
+
 
 
 renderNotes(notes);
+renderEditedTime(getEditedTime());
 
 searchBox.addEventListener('input', function(e){
     let searchText = e.target.value;
@@ -53,20 +74,32 @@ searchBox.addEventListener('input', function(e){
     renderNotes(notes);
 });
 
+sortBy.addEventListener('change', function(){
+    renderNotes(notes);
+})
+
 window.addEventListener('storage', function(){
     notes = getSavedNotes();
+    renderEditedTime(getEditedTime());
     renderNotes(notes);
 })
 
 newNote.addEventListener('click', function(e){
     e.preventDefault();
     const identifier = uuidv4();
+    const timestamp = moment().valueOf();
+    saveEditedTime(timestamp);
     notes.push({
         id: identifier,
         title: '',
         body: '',
-        tag: ''
+        tag: '',
+        createdAt: timestamp,
+        updatedAt: timestamp,
     });
     saveNotes(notes);
     location.assign(`/edit.html#${identifier}`);
 });
+
+
+

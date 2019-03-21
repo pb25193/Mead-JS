@@ -23,17 +23,26 @@ tagBox.value = note.tag;
 //functionality
 
 titleBox.addEventListener('input', function(e){
+    const timestamp = moment().valueOf();
+    saveEditedTime(timestamp);
     note.title = e.target.value;
+    note.updatedAt = timestamp;
     saveNotes(notes);
 });
 
 bodyBox.addEventListener('input', function(e){
+    const timestamp = moment().valueOf();
+    saveEditedTime(timestamp);
     note.body = e.target.value;
+    note.updatedAt = timestamp;
     saveNotes(notes);
 });
 
 tagBox.addEventListener('input', function(e){
+    const timestamp = moment().valueOf();
+    saveEditedTime(timestamp);
     note.tag = e.target.value;
+    note.updatedAt = timestamp;
     saveNotes(notes);
 });
 
