@@ -57,6 +57,7 @@ completeBtn.addEventListener('click', function(){
             let checkBox = document.querySelector(`#check-${element.id}`);
             if(checkBox.checked){
                 element.done = true;
+                element.completedAt = moment().valueOf();
             }
         }
     });
@@ -71,11 +72,19 @@ searchBox.addEventListener('input', e => {
 
 addForm.addEventListener('submit', function (e) {
     e.preventDefault();
+    let deadline = moment().add({
+        days: e.target.days.value,
+        hours: e.target.hours.value
+    });
+    console.log(deadline.toString());
     if(e.target.task.value){
         let todo = {
             id: uuidv4(),
             task: e.target.task.value,
-            done: false
+            done: false,
+            deadline: deadline.valueOf(),
+            completedAt: 0,
+            createdAt: moment().valueOf()
         };
         e.target.task.value='';
         todos.push(todo);
@@ -83,6 +92,3 @@ addForm.addEventListener('submit', function (e) {
         renderTodos(todos);
     }
 });
-
-a=uuidv4();
-console.log(a);

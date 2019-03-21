@@ -2,6 +2,7 @@
 
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="./style.css">
     </head>
     <body>
         <h1>ToDo app is here!</h1>
@@ -9,7 +10,10 @@
         <label>Filter:<input id="search-box" placeholder="Search for a task"> </label>
         <form id="add-todo">
             <label for="task">Task:</label> 
-            <input name="task" id="task" placeholder="What's on your mind?">
+            <input name="task" id="task" placeholder="What's on your mind?"> <br>
+            <label for="days">Deadline:</label> 
+            <input name="days" id="days" placeholder="Days">  <input name="hours" id="hours" placeholder="Hours"> <br>
+            <label for="days">Task:</label> 
             <button>Add</button>
         </form>
         <h3>Pending tasks for today:</h3>
