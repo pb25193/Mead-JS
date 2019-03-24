@@ -98,7 +98,7 @@ newNote.addEventListener('click', function(e){
         updatedAt: timestamp,
     });
     saveNotes(notes);
-    location.assign(`/edit.html#${identifier}`);
+    location.assign(`./edit.html#${identifier}`);
 });
 
 

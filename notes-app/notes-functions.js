@@ -63,7 +63,7 @@ let defineDelete = function(button, identifier){
 
 let defineEdit = function(button, identifier){
     button.addEventListener('click', function(){
-        location.assign(`/edit.html#${identifier}`);
+        location.assign(`./edit.html#${identifier}`);
     });
 }
 
