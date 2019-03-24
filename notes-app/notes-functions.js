@@ -22,7 +22,12 @@ let renderEditedTime = function(timestamp){
 let getSavedNotes = function(){
     let notesText = localStorage.getItem('notes');
     if(notesText){
-        return JSON.parse(notesText);
+        try{
+            return JSON.parse(notesText);
+        }
+        catch{
+            return [];
+        }    
     } else {
         return [];
     }

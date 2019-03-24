@@ -29,7 +29,12 @@ let storeTodos = function(todos){
 let retrieveTodos = function(){
     let todoText = localStorage.getItem('todos');
     if(todoText){
-        return JSON.parse(todoText);
+        try{
+            return JSON.parse(todoText);
+        }
+        catch{
+            return [];
+        }
     } else {
         return [];
     }
