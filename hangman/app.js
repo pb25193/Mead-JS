@@ -11,10 +11,10 @@ const showGame = () => {
 
 let game;
 
-getPuzzle((puzzle)=>{
+getPuzzle.then((puzzle)=>{
     game = new Hangman(puzzle);
     showGame();
-});
+}).catch((e)=>console.log(e));
 
 
 window.addEventListener('keypress', (e)=>{
@@ -47,7 +47,8 @@ window.addEventListener('keypress', (e)=>{
 
 let country;
 
-getCountry('PK', (countryName)=>{
+getCountry('RO').then((countryName)=>{
     country = countryName;
     console.log(country);
-});
+}).catch((e)=>console.log(e));
+
