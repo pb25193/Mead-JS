@@ -40,19 +40,3 @@ Hangman.prototype.status = function(){
     if(completed) return "complete";
     return "playing";
 };
-
-let puzzleDOM = document.querySelector('#puzzle');
-let guessesDOM = document.querySelector('#guesses');
-
-
-game = new Hangman("attention seeker");
-
-window.addEventListener('keypress', (e)=>{
-    game.guess(e.key);
-    puzzleDOM.textContent=game.generator();
-    if(game.status()==='playing')guessesDOM.textContent=`You have only ${game.attempts} guesses left!`;
-    if(game.status()==='fail')guessesDOM.textContent=`You loser! the word was ${game.word.join('')}...`;
-    if(game.status()==='complete')guessesDOM.textContent=`You won!`;
-});
-
-
