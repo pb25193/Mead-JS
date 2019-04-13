@@ -1,12 +1,13 @@
 //set up
 
-doneBtn = document.querySelector('#edit-done');
-titleBox = document.querySelector('#note-title');
-bodyBox = document.querySelector('#note-body');
-tagBox = document.querySelector('#note-tag');
-noteID = location.hash.substring(1);
-notes=getSavedNotes();
-note = notes.find(function(element){
+let deleteBtn = document.querySelector('#edit-delete');
+let titleBox = document.querySelector('#note-title');
+let editedFromNow = document.querySelector('#last-edited');
+let bodyBox = document.querySelector('#note-body');
+let tagBox = document.querySelector('#note-tag');
+let noteID = location.hash.substring(1);
+let notes=getSavedNotes();
+let note = notes.find(function(element){
     return (element.id === noteID);
 });
 if(!note){
@@ -16,11 +17,14 @@ if(!note){
 
 // fill em in
 
+renderEditedTime(getEditedTime());
 titleBox.value = note.title;
 bodyBox.textContent = note.body;
 tagBox.value = note.tag;
 
 //functionality
+
+
 
 titleBox.addEventListener('input', function(e){
     const timestamp = moment().valueOf();
@@ -35,6 +39,7 @@ bodyBox.addEventListener('input', function(e){
     saveEditedTime(timestamp);
     note.body = e.target.value;
     note.updatedAt = timestamp;
+    renderEditedTime(getEditedTime());
     saveNotes(notes);
 });
 
@@ -46,6 +51,14 @@ tagBox.addEventListener('input', function(e){
     saveNotes(notes);
 });
 
-doneBtn.addEventListener('click', function(){
+deleteBtn.addEventListener('click', function(){
+    const index = notes.findIndex(function(note){
+        return note.id === noteID;
+    });
+    console.log('hi', index);
+    if (index > -1){
+        notes.splice(index, 1);
+        saveNotes(notes);
+    }
     location.assign('/index.html');
 });

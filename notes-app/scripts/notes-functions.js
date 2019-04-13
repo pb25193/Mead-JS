@@ -1,18 +1,23 @@
 let renderNotes = function(notes){
     notesDiv.innerHTML = '';
-    notes.sort(sorters[sortBy.value]);
-    notes.forEach(function(element){
-        let searchAllows = element.title.includes(filters.searchText);
-        if(searchAllows){
-            let noteEl = generateNote(element);
-            notesDiv.appendChild(noteEl);
-        }
-    });
+    if(notes.length===0){
+        const emptyEl = document.createElement('p');
+        emptyEl.textContent = 'There are no notes to show! Add a note to get started.';
+    } else {
+        notes.sort(sorters[sortBy.value]);
+        notes.forEach(function(element){
+            let searchAllows = element.title.includes(filters.searchText);
+            if(searchAllows){
+                let noteEl = generateNote(element);
+                notesDiv.appendChild(noteEl);
+            }
+        });
+    }
 }
 
 let renderEditedTime = function(timestamp){
     if(timestamp){
-        editedFromNow.textContent = `This list was edited ${moment(timestamp).fromNow()}`;
+        editedFromNow.textContent = `This note was edited ${moment(timestamp).fromNow()}`;
     } else {
         editedFromNow.textContent = `Please create a note!`;
     }
@@ -73,20 +78,26 @@ let defineEdit = function(button, identifier){
 }
 
 let generateNote = function(element){
-    const noteEl = document.createElement('div');
+    const noteEl = document.createElement('a');
+    noteEl.setAttribute('class', 'list-item');
+    const url = `/edit.html#${element.id}`;
+    noteEl.setAttribute('href', `/edit.html#${element.id}`);
     const title = document.createElement('h3');
     const body = document.createElement('p');
+    title.setAttribute('class', 'list-item__title');
+    body.setAttribute('class', 'list-item__subtitle');
     const deleteButton = document.createElement('button');
     const editButton = document.createElement('button');
     deleteButton.textContent = 'Delete';
     editButton.textContent = 'Edit';
+    editButton.setAttribute('class', 'button');
     title.textContent = element.title;
-    body.textContent = element.body;
+    body.textContent = `edited ${moment(element.updatedAt).fromNow()}`;
     defineDelete(deleteButton, element.id);
     defineEdit(editButton, element.id);
     noteEl.appendChild(title);
     noteEl.appendChild(body);
-    noteEl.appendChild(deleteButton);
+    // noteEl.appendChild(deleteButton);
     noteEl.appendChild(editButton);
     return noteEl;
 }

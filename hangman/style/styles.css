@@ -11,7 +11,7 @@
  body {
      background: #2B292E;
      color: #fafafa;
-     font-family: Helvetica, Arial, sans-serif;
+     font-family: 'Montserrat', sans-serif;
      font-size: 1.6rem;
      display: flex;
      align-items: center;
@@ -25,8 +25,11 @@
      font-size: 2rem;
      height: 2.4rem;
      line-height: 2.4rem;
+     font-family: 'Rock Salt', sans-serif;
      margin: 0 .1rem;
      text-align: center;
+     color: #9fb198;
+     text-shadow: 2px 2px #d16d6d;
      text-transform: uppercase;
      width: 2.4rem;
 }
@@ -54,5 +57,6 @@
 }
 
  .button:hover {
+     box-shadow: #7044a0;
      background: #5F3A87;
 }

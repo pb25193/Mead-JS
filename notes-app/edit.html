@@ -2,24 +2,36 @@
 
 <html>
     <head>
-
+        <link rel="stylesheet" href="/style/styles.css">
     </head>
     <body>
-        <label>
-            Title: <input id = 'note-title'>
-        </label>
+        <div class="header">
+            <div class="container">
+                <h1 class="header__title">Welcome to Notes App! </h1>
+                <h2 class="header__subtitle">The best notes app since ...EVER.</h2>
+            </div>
+        </div>
+        <div class="actions">
+                <div class="actions__container actions__container--spaced">
+                    <a href="/index.html">Home</a>
+                    <span id="last-edited"></span>
+                </div>
+        </div>
         <br>
-        <label>
-            Note: <textarea id = 'note-body'></textarea>
-        </label>
-        <br>
-        <label>
-            Tag: <input id = 'note-tag'>
-        </label> 
-        <br>
-        <button id='edit-done'>Done</button>
+        <div class="container">
+            <label>
+                Title: <input class="title-input" id = 'note-title'>
+            </label>
+            <label>
+                Note: <textarea class="body-input" id = 'note-body'></textarea>
+            </label>
+            <label>
+                Tag: <input class="title-input" id = 'note-tag'>
+            </label>             
+            <button class="button button--secondary" id='edit-delete'>Remove Note</button>
+        </div>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-    <script src="notes-functions.js"></script>
-    <script src="notes-edit.js"></script>
+    <script src="/scripts/notes-functions.js"></script>
+    <script src="/scripts/notes-edit.js"></script>
 </html>

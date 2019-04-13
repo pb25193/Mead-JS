@@ -38,7 +38,6 @@ notes = getSavedNotes();
 let searchBox = document.querySelector('#search-box');
 let notesDiv = document.querySelector('#notes');
 let newNote = document.querySelector("#new-note");
-let editedFromNow = document.querySelector('#last-edited');
 let sortBy = document.querySelector('#sort-by');
 
 const filters = {
@@ -66,7 +65,6 @@ const sorters = {
 
 
 renderNotes(notes);
-renderEditedTime(getEditedTime());
 
 searchBox.addEventListener('input', function(e){
     let searchText = e.target.value;
@@ -80,7 +78,6 @@ sortBy.addEventListener('change', function(){
 
 window.addEventListener('storage', function(){
     notes = getSavedNotes();
-    renderEditedTime(getEditedTime());
     renderNotes(notes);
 })
 

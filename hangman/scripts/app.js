@@ -76,7 +76,7 @@ getCountry('RO').then((countryName)=>{
     console.log(country);
 }).catch((e)=>console.log(e));
 
-fetch('http://puzzle.mead.io/puzzle', {}).then((response)=>{
+fetch('//puzzle.mead.io/puzzle', {}).then((response)=>{
     if(response.status === 200){
         return response.json();
     } else {
