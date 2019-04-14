@@ -2,30 +2,45 @@
 
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="./style.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./style/styles.css">
+        <link rel="icon" href="./images/favicon.png">
     </head>
     <body>
-        <h1>ToDo app is here!</h1>
-        <h2>Never miss a god damn task!</h2>
-        <label>Filter:<input id="search-box" placeholder="Search for a task"> </label>
-        <form id="add-todo">
-            <label for="task">Task:</label> 
-            <input name="task" id="task" placeholder="What's on your mind?"> <br>
-            <label for="days">Deadline:</label> 
-            <input name="days" id="days" placeholder="Days">  <input name="hours" id="hours" placeholder="Hours"> <br>
-            <label for="days">Task:</label> 
-            <button>Add</button>
-        </form>
-        <h3>Pending tasks for today:</h3>
-        <div id="incomplete-todos">
+        <div class="header">
+            <div class="container">
+                <h1 class="header__title">ToDo app is here!</h1>
+                <h2 class="header__subtitle">Never miss a god damn task!</h2>
+            </div>
         </div>
-        <button id="mark-complete">Mark as completed</button>
-        <h3>The following items are completed:</h3>
-        <div id="completed-todos">
-        </div>  
-        <script src="uuid.js"></script>
+        <div class="actions">
+            <div class="actions__container">
+                <input id="search-box" class="input" placeholder="Search for a task">
+            </div>
+        </div>
+        <div class="actions--2">
+            <div class="actions__container">
+                    <form id="add-todo">
+                        <input class="input" name="task" id="task" placeholder="Enter task!"> <br> <br>
+                        <input class="input" name="days" id="days" placeholder="ETA(days)">  
+                        <input class="input" name="hours" id="hours" placeholder="ETA(hours)"> 
+                        <button class="button">Add</button>
+                    </form>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <!-- <h3>Pending tasks for today:</h3> -->
+            <div id="incomplete-todos">
+            </div> <br>
+            <button id="mark-complete" class="button">Mark as completed</button> <br> <br>
+            <!-- <h3>The following items are completed:</h3> -->
+            <div id="completed-todos">
+            </div>  
+        </div>
+        <script src="./scripts/uuid.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-        <script src="todos-functions.js"></script>
-        <script src="todos.js"></script>      
+        <script src="./scripts/todos-functions.js"></script>
+        <script src="./scripts/todos.js"></script>      
     </body>
 </html>

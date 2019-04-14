@@ -72,15 +72,24 @@ searchBox.addEventListener('input', e => {
 
 addForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    let deadline = moment().add({
-        days: e.target.days.value,
-        hours: e.target.hours.value
-    });
+    const text = e.target.task.value.trim();
+    if(text.length===0) return;
+    let deadline;
+    if(!e.target.days.value && !e.target.hours.value){
+        deadline = moment().add({
+            hours: 6
+        });
+    } else {
+        deadline = moment().add({
+            days: e.target.days.value,
+            hours: e.target.hours.value
+        });
+    }
     console.log(deadline.toString());
     if(e.target.task.value){
         let todo = {
             id: uuidv4(),
-            task: e.target.task.value,
+            task: text,
             done: false,
             deadline: deadline.valueOf(),
             completedAt: 0,

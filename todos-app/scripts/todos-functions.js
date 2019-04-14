@@ -1,5 +1,6 @@
 let renderTodos = function(todos){
     pendingTasks.innerHTML = '';
+    completeBtn.style.display = "none";
     completeTasks.innerHTML = '';
     todos.sort((a, b)=>{
         return a.deadline-b.deadline;
@@ -10,15 +11,25 @@ let renderTodos = function(todos){
     todos.forEach((element, index) => {
         if(element.task.toLowerCase().includes(filters.searchText.toLowerCase())){
             if(element.done){
+                if(completeTasks.innerHTML === ''){
+                    completeTasks.textContent = "The following tasks have been completed:";
+                }
                 let item = generateTask(element);
                 completeTasks.appendChild(item);
             } else {
+                completeBtn.style.display = "inline";
+                if(pendingTasks.innerHTML === ''){
+                    pendingTasks.textContent = "Here are your to-dos:";
+                }
                 let item = generateTask(element);
                 pendingTasks.appendChild(item);
                 //pendingTasks.appendChild(document.createElement('br'));
             }
         }
     });
+    if(pendingTasks.innerHTML === ''){
+        pendingTasks.textContent = "You have no to-dos! Add a to-do to get started!";
+    }
 };
 
 
@@ -56,23 +67,32 @@ let defineDelete = function(button, identifier){
 }
 
 let generateTask = function(element){
-    const taskDiv = document.createElement('div');
+    const taskDiv = document.createElement('label');
+    const containerEl = document.createElement('div');
     taskDiv.setAttribute('id', 'div-'+element.id);
     if(element.done){
-        const spanEl = document.createElement('span');
-        const timeEl = document.createElement('span');
+        const spanEl = document.createElement('div');
+        spanEl.setAttribute('class', 'block');
+        const timeEl = document.createElement('div');
+        timeEl.setAttribute('class', 'block');
         const button = document.createElement('button');
         timeEl.innerText = `completed ${moment(element.completedAt).fromNow()}` 
         spanEl.innerText = element.task;
         button.textContent = 'Delete';
+        button.classList.add('button', 'button--text');
         defineDelete(button, element.id);
         timeEl.setAttribute('class', 'due-time');
-        taskDiv.appendChild(spanEl);
-        taskDiv.appendChild(timeEl);
+        containerEl.appendChild(spanEl);
+        containerEl.appendChild(timeEl);
+        containerEl.classList.add('list-item__container');
+        taskDiv.classList.add('list-item');
+        taskDiv.appendChild(containerEl)
         taskDiv.appendChild(button);
     } else {
-        const spanEl = document.createElement('span');
-        const timeEl = document.createElement('span');
+        const spanEl = document.createElement('div');
+        spanEl.setAttribute('class', 'block');
+        const timeEl = document.createElement('div');
+        timeEl.setAttribute('class', 'block');
         spanEl.innerText = element.task;
         if(moment().valueOf()<element.deadline){
             timeEl.innerText = `due at ${moment(element.deadline).format("hh:mma, Do MMMM, YYYY")}, added ${moment(element.createdAt).fromNow()}`;
@@ -85,10 +105,14 @@ let generateTask = function(element){
         timeEl.setAttribute('class', 'due-time');
         const button = document.createElement('button');
         button.textContent = 'Delete';
+        button.classList.add('button', 'button--text');
         defineDelete(button, element.id);
-        taskDiv.appendChild(boxEl);
-        taskDiv.appendChild(spanEl);
-        taskDiv.appendChild(timeEl);
+        containerEl.appendChild(boxEl);
+        containerEl.appendChild(spanEl);
+        containerEl.appendChild(timeEl);
+        containerEl.classList.add('list-item__container');
+        taskDiv.classList.add('list-item');
+        taskDiv.appendChild(containerEl)
         taskDiv.appendChild(button);
     }
     return taskDiv;

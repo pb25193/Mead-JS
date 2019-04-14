@@ -2,8 +2,14 @@ let renderNotes = function(notes){
     notesDiv.innerHTML = '';
     if(notes.length===0){
         const emptyEl = document.createElement('p');
+        const br = document.createElement('br');
         emptyEl.textContent = 'There are no notes to show! Add a note to get started.';
+        notesDiv.appendChild(emptyEl);
+        notesDiv.appendChild(br);
     } else {
+        const introEl = document.createElement('p');
+        introEl.textContent = 'Here are your notes:';
+        notesDiv.appendChild(introEl);
         notes.sort(sorters[sortBy.value]);
         notes.forEach(function(element){
             let searchAllows = element.title.includes(filters.searchText);
