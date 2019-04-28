@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="/style/styles.css">
+    </head>
+    <body>
+        <div class="header">
+            <div class="container">
+                <h1 class="header__title">Welcome to Notes App! </h1>
+                <h2 class="header__subtitle">The best notes app since ...EVER.</h2>
+            </div>
+        </div>
+        <div class="actions">
+                <div class="actions__container actions__container--spaced">
+                    <a href="/index.html">Home</a>
+                    <span id="last-edited"></span>
+                </div>
+        </div>
+        <br>
+        <div class="container">
+            <label>
+                Title: <input class="title-input" id = 'note-title'>
+            </label>
+            <label>
+                Note: <textarea class="body-input" id = 'note-body'></textarea>
+            </label>
+            <label>
+                Tag: <input class="title-input" id = 'note-tag'>
+            </label>             
+            <button class="button button--secondary" id='edit-delete'>Remove Note</button>
+        </div>
+    </body>
+    <script src="/scripts/edit-bundle.js"></script>
+</html>
