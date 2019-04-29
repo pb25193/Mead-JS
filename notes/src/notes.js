@@ -1,4 +1,3 @@
-
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 
@@ -41,7 +40,7 @@ let saveNotes = function(){
     localStorage.setItem('notes', notesText);
 };
 
-const getNotes = () => notes;
+const getNotes = () => loadNotes();
 
 const createNote = () => {
     const identifier = uuidv4();
@@ -56,6 +55,7 @@ const createNote = () => {
         updatedAt: timestamp,
     });
     saveNotes();
+    return identifier;
 }
 
 const removeNote = (identifier) => {
@@ -72,11 +72,13 @@ const updateNote = (identifier, updates) => {
     if(!note) return;
     if(typeof updates.title === 'string') note.title = updates.title;
     if(typeof updates.body === 'string') note.body = updates.body;
+    if(typeof updates.tag === 'string') note.tag = updates.tag;
     note.updatedAt = moment().valueOf();
     saveNotes();
+    return note;
 }
 
-const sortNotes = (sortBy) => sorters[sortBy] ? notes.sort(sorters[sortBy]) : notes;
+const sortNotes = (sortBy) => sorters[sortBy] ? getNotes().sort(sorters[sortBy]) : notes;
 
 notes = loadNotes();
 

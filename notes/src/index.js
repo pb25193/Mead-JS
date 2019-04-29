@@ -1,21 +1,33 @@
-import {getNotes, createNote, removeNote, updateNote} from './notes';
-import {getFilters, setFilters} from './filters';
+import {createNote} from './notes';
+import {setFilters} from './filters';
+import {renderNotes} from './views';
 
-console.log('index.js')
 
-// console.log(getNotes());
-// createNote();
+let searchBox = document.querySelector('#search-box');
+let newNote = document.querySelector("#new-note");
+let sortBy = document.querySelector('#sort-by');
 
-// removeNote("dce0e324-f2bb-4b19-ae28-49a54d380312");
 
-// updateNote("27874c03-2f9b-43c3-b57c-4d53c5be03d0", {title: 'gaali', body: 'le na mu me'});
+renderNotes();
 
-console.log(getFilters());
-
-setFilters({
-    searchText: 'office'
+searchBox.addEventListener('input', function(e){
+    setFilters({searchText: e.target.value});
+    renderNotes();
 });
 
-console.log(getFilters());
+sortBy.addEventListener('change', function(){
+    renderNotes();
+})
 
-console.log(getNotes());
+window.addEventListener('storage', function(e){
+    if(e.key === 'notes'){
+        renderNotes();
+    }
+})
+
+newNote.addEventListener('click', function(e){
+    e.preventDefault();
+    const identifier = createNote();
+    location.assign(`./edit.html#${identifier}`);
+});
+

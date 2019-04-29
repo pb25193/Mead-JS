@@ -1,5 +1,12 @@
-let renderNotes = function(notes){
+import moment from 'moment';
+import {getFilters} from './filters';
+import {sortNotes, getNotes} from './notes';
+
+let renderNotes = function(){
+    let notesDiv = document.querySelector('#notes');
     notesDiv.innerHTML = '';
+    const filters = getFilters();
+    const notes = sortNotes(document.querySelector('#sort-by').value);
     if(notes.length===0){
         const emptyEl = document.createElement('p');
         const br = document.createElement('br');
@@ -10,7 +17,6 @@ let renderNotes = function(notes){
         const introEl = document.createElement('p');
         introEl.textContent = 'Here are your notes:';
         notesDiv.appendChild(introEl);
-        notes.sort(sorters[sortBy.value]);
         notes.forEach(function(element){
             let searchAllows = element.title.includes(filters.searchText);
             if(searchAllows){
@@ -21,7 +27,9 @@ let renderNotes = function(notes){
     }
 };
 
+
 let renderEditedTime = function(timestamp){
+    let editedFromNow = document.querySelector('#last-edited');
     if(timestamp){
         editedFromNow.textContent = `This note was edited ${moment(timestamp).fromNow()}`;
     } else {
@@ -30,68 +38,29 @@ let renderEditedTime = function(timestamp){
 };
 
 
-let getSavedNotes = function(){
-    let notesText = localStorage.getItem('notes');
-    if(notesText){
-        try{
-            return JSON.parse(notesText);
-        }
-        catch(e){
-            return [];
-        }    
-    } else {
-        return [];
+let initializeEditPage = (noteID) => {
+    console.log('ye lo');
+    let titleBox = document.querySelector('#note-title');
+    let bodyBox = document.querySelector('#note-body');
+    let tagBox = document.querySelector('#note-tag');
+    let notes=getNotes();
+    let note = notes.find((element) => (element.id === noteID));
+    if(!note){
+        location.assign('/index.html');
     }
+
+    renderEditedTime(note.updatedAt);
+    titleBox.value = note.title;
+    bodyBox.textContent = note.body;
+    tagBox.value = note.tag;
 };
 
-//!!
-let getEditedTime = function(){
-    let timeText = localStorage.getItem('editedTime');
-    if(timeText){
-        return JSON.parse(timeText);
-    } else {
-        return 0;
-    }
-};
-
-//!!
-let saveEditedTime = function(timestamp){
-    const timeText = JSON.stringify(timestamp);
-    localStorage.setItem('editedTime', timeText);
-};
-
-let saveNotes = function(notes){
-    const notesText = JSON.stringify(notes);
-    localStorage.setItem('notes', notesText);
-};
-
-
-
-
-let defineDelete = function(button, identifier){
-    button.addEventListener('click', function(){
-        const index = notes.findIndex(function(note){
-            return note.id === identifier;
-        });
-        if (index > -1){
-            notes.splice(index, 1);
-            saveNotes(notes);
-            renderNotes(notes);
-        }
-    });
-};
-
-let defineEdit = function(button, identifier){
-    button.addEventListener('click', function(){
-        location.assign(`./edit.html#${identifier}`);
-    });
-};
 
 let generateNote = function(element){
     const noteEl = document.createElement('a');
     noteEl.setAttribute('class', 'list-item');
     const url = `/edit.html#${element.id}`;
-    noteEl.setAttribute('href', `/edit.html#${element.id}`);
+    noteEl.setAttribute('href', `./edit.html#${element.id}`);
     const title = document.createElement('h3');
     const body = document.createElement('p');
     title.setAttribute('class', 'list-item__title');
@@ -103,12 +72,9 @@ let generateNote = function(element){
     editButton.setAttribute('class', 'button');
     title.textContent = element.title;
     body.textContent = `edited ${moment(element.updatedAt).fromNow()}`;
-    defineDelete(deleteButton, element.id);
-    defineEdit(editButton, element.id);
     noteEl.appendChild(title);
     noteEl.appendChild(body);
-    // noteEl.appendChild(deleteButton);
-    noteEl.appendChild(editButton);
     return noteEl;
 };
 
+export {generateNote, renderEditedTime, renderNotes, initializeEditPage};
