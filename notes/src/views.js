@@ -39,7 +39,6 @@ let renderEditedTime = function(timestamp){
 
 
 let initializeEditPage = (noteID) => {
-    console.log('ye lo');
     let titleBox = document.querySelector('#note-title');
     let bodyBox = document.querySelector('#note-body');
     let tagBox = document.querySelector('#note-tag');

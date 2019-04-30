@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="./style/styles.css">
+        <link rel="icon" href="./images/favicon.png">
+    </head>
+    <body>
+        <div class="header">
+            <div class="container">
+                <h1 class="header__title">ToDo app is here!</h1>
+                <h2 class="header__subtitle">Never miss a god damn task!</h2>
+            </div>
+        </div>
+        <div class="actions">
+            <div class="actions__container">
+                <input id="search-box" class="input" placeholder="Search for a task">
+            </div>
+        </div>
+        <div class="actions--2">
+            <div class="actions__container">
+                    <form id="add-todo">
+                        <input class="input" name="task" id="task" placeholder="Enter task!"> <br> <br>
+                        <input class="input" name="days" id="days" placeholder="ETA(days)">  
+                        <input class="input" name="hours" id="hours" placeholder="ETA(hours)"> 
+                        <button class="button">Add</button>
+                    </form>
+            </div>
+        </div>
+        <br>
+        <div class="container">
+            <!-- <h3>Pending tasks for today:</h3> -->
+            <div id="incomplete-todos">
+            </div> <br>
+            <button id="mark-complete" class="button">Mark as completed</button> <br> <br>
+            <!-- <h3>The following items are completed:</h3> -->
+            <div id="completed-todos">
+            </div>  
+        </div>
+        <script src="./scripts/bundle.js"></script>    
+    </body>
+</html>
